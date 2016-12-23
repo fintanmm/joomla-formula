@@ -1,9 +1,8 @@
 ================
-template-formula
+joomla-formula
 ================
 
-A saltstack formula that is empty. It has dummy content to help with a quick
-start on a new formula.
+A saltstack formula to install and configure Joomla on Debian, Ubuntu, and RHEL.
 
 .. note::
 
@@ -13,10 +12,24 @@ start on a new formula.
 Available states
 ================
 
+Available states
+================
+
 .. contents::
     :local:
 
-``template``
-------------
+``joomla``
+-------------
 
-Installs the template package, and starts the associated template service.
+Install and configure Joomla sites
+
+``joomla.cli``
+-------------
+
+Installs joomlatools
+
+
+``joomla.config``
+-------------
+
+Configure Joomla sites
