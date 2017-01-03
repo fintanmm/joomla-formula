@@ -23,27 +23,7 @@ env:
   - INSTANCE: cli-ubuntu-1604 
   - INSTANCE: cli-debian-7    
   - INSTANCE: cli-debian-8    
-  - INSTANCE: cli-centos-6    
-  - INSTANCE: manager-ubuntu-1404
-  - INSTANCE: manager-ubuntu-1604
-  - INSTANCE: manager-debian-7   
-  - INSTANCE: manager-debian-8   
-  - INSTANCE: manager-centos-6   
-  - INSTANCE: expires-ubuntu-1404
-  - INSTANCE: expires-ubuntu-1604
-  - INSTANCE: expires-debian-7   
-  - INSTANCE: expires-debian-8   
-  - INSTANCE: expires-centos-6   
-  - INSTANCE: context-ubuntu-1404
-  - INSTANCE: context-ubuntu-1604
-  - INSTANCE: context-debian-7   
-  - INSTANCE: context-debian-8   
-  - INSTANCE: context-centos-6   
-  - INSTANCE: cluster-ubuntu-1404
-  - INSTANCE: cluster-ubuntu-1604
-  - INSTANCE: cluster-debian-7   
-  - INSTANCE: cluster-debian-8   
-  - INSTANCE: cluster-centos-6   
+  - INSTANCE: cli-centos-6
 
 # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
 before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
