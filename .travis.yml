@@ -3,9 +3,21 @@ language: ruby
 rvm:
   - 2.2.5
 
+php:
+  - '5.6'
+
 sudo: required
 services: 
   - docker
+  - mysql
+
+addons:
+  apt:
+    packages:
+      - php-mysql
+  yum:
+    packages:
+      - php-mysql
 
 env:
   matrix:
@@ -26,7 +38,10 @@ env:
   - INSTANCE: cli-centos-6
 
 # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
-before_script: sudo iptables -L DOCKER || sudo iptables -N DOCKER
+before_script: 
+  - sudo iptables -L DOCKER || sudo iptables -N DOCKER
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS siteAdb;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS siteBdb;'
 
 install:
   # setup ci for test formula
