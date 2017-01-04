@@ -14,10 +14,10 @@ services:
 addons:
   apt:
     packages:
-      - php-mysql
+      - php5-mysql
   yum:
     packages:
-      - php-mysql
+      - php5-mysql
 
 env:
   matrix:
