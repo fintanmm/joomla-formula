@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "joomla/map.jinja" import joomla with context %}
 
 install_joomlatools:
  cmd.run:

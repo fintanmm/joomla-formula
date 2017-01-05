@@ -2,7 +2,7 @@
 # vim: ft=jinja
 
 {## Start with  defaults from defaults.sls ##}
-{% import_yaml 'template/defaults.yaml' as default_settings %}
+{% import_yaml 'joomla/defaults.yaml' as default_settings %}
 
 {##
 Setup variable using grains['os_family'] based logic, only add key:values here
@@ -11,23 +11,19 @@ that differ from whats in defaults.yaml
 {% set os_family_map = salt['grains.filter_by']({
         'Debian': {},
         'Suse': {},
-        'Arch': {
-            "pkg" : 'template-arch',
-        },
-        'RedHat': {
-            "config": '/etc/template.conf',
-        },
+        'Arch': {},
+        'RedHat': {},
   }
   , grain="os_family"
-  , merge=salt['pillar.get']('template:lookup'))
+  , merge=salt['pillar.get']('joomla:lookup'))
 %}
 {## Merge the flavor_map to the default settings ##}
-{% do default_settings.template.update(os_family_map) %}
+{% do default_settings.joomla.update(os_family_map) %}
 
-{## Merge in template:lookup pillar ##}
-{% set template = salt['pillar.get'](
-        'template',
-        default=default_settings.template,
+{## Merge in joomla:lookup pillar ##}
+{% set joomla = salt['pillar.get'](
+        'joomla',
+        default=default_settings.joomla,
         merge=True
     )
 %}
