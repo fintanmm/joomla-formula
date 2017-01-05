@@ -1,4 +1,4 @@
-language: ruby
+language: php
 
 rvm:
   - 2.2.5
@@ -42,7 +42,6 @@ before_script:
   - sudo iptables -L DOCKER || sudo iptables -N DOCKER
   - mysql -e 'CREATE DATABASE IF NOT EXISTS siteAdb;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS siteBdb;'
-  - composer self-update
 
 install:
   # setup ci for test formula
