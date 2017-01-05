@@ -41,26 +41,26 @@ provisioner:
       '*':
         - joomla:
             sites:
-                sitenameA.com:
-                    username: siteAuser
-                    password: siteApass
-                    database: siteAdb
-                    dbhost: localhost
-                    dbuser: siteAdbuser
-                    dbpass: siteAdbpass
-                    url: http://siteA.com
-                    title: 'siteA title'
-                    email: siteA@email.com
-                sitenameB.com:
-                    username: siteBuser
-                    password: siteBpass
-                    database: siteBdb
-                    dbhost: localhost
-                    dbuser: siteBdbuser
-                    dbpass: siteBdbpass
-                    url: http://siteB.com
-                    title: 'siteB title'
-                    email: siteB@email.com
+              sitenameA.com:
+                username: siteAuser
+                password: siteApass
+                database: siteAdb
+                dbhost: localhost
+                dbuser: siteAdbuser
+                dbpass: siteAdbpass
+                url: http://siteA.com
+                title: 'siteA title'
+                email: siteA@email.com
+              sitenameB.com:
+                username: siteBuser
+                password: siteBpass
+                database: siteBdb
+                dbhost: localhost
+                dbuser: siteBdbuser
+                dbpass: siteBdbpass
+                url: http://siteB.com
+                title: 'siteB title'
+                email: siteB@email.com
         
 suites:
   - name: joomla_high
