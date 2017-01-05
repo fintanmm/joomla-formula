@@ -27,40 +27,40 @@ provisioner:
   salt_version: latest
   data_path: test/shared
   pillars:
-      top.sls:
-        base:
-          '*':
-            - joomla
+    top.sls:
+      base:
+        '*':
+          - joomla
 
-      joomla.sls:
-        joomla:
+    joomla.sls:
+      joomla:
+        sites:
+          sitenameA.com:
+            username: siteAuser
+            password: siteApass
+            database: siteAdb
+            dbhost: localhost
+            dbuser: siteAdbuser
+            dbpass: siteAdbpass
+            url: http://siteA.com
+            title: 'siteA title'
+            email: siteA@email.com
+          sitenameB.com:
+            username: siteBuser
+            password: siteBpass
+            database: siteBdb
+            dbhost: localhost
+            dbuser: siteBdbuser
+            dbpass: siteBdbpass
+            url: http://siteB.com
+            title: 'siteB title'
+            email: siteB@email.com
   log_level: <%= ENV['SALT_DEBUG_LEVEL'] || 'info' %>
   formula: joomla
   state_top:
     base:
       '*':
-        - joomla:
-            sites:
-              sitenameA.com:
-                username: siteAuser
-                password: siteApass
-                database: siteAdb
-                dbhost: localhost
-                dbuser: siteAdbuser
-                dbpass: siteAdbpass
-                url: http://siteA.com
-                title: 'siteA title'
-                email: siteA@email.com
-              sitenameB.com:
-                username: siteBuser
-                password: siteBpass
-                database: siteBdb
-                dbhost: localhost
-                dbuser: siteBdbuser
-                dbpass: siteBdbpass
-                url: http://siteB.com
-                title: 'siteB title'
-                email: siteB@email.com
+        - joomla
         
 suites:
   - name: joomla_high
