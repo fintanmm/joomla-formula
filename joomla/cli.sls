@@ -5,7 +5,7 @@
 
 check_composer_path:
   cmd.run:
-    - name: 'ls /usr/local/bin/ /usr/local/sbin/'
+    - name: 'ls /usr/bin/ /usr/sbin/'
 
 install_joomlatools:
   cmd.run:
