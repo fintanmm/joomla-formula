@@ -26,12 +26,111 @@ provisioner:
   salt_bootstrap_url: https://bootstrap.saltstack.com
   salt_version: latest
   data_path: test/shared
+  dependencies: 
+    - {name: php, path: /tmp/php}
+    - {name: apache, path: /tmp/apache}
+    - {name: mysql, path: /tmp/mysql}
   pillars:
     top.sls:
       base:
         '*':
+          - apache
+          - php
+          - mysql
           - joomla
-
+    apache.sls:
+      apache:
+        sites:
+          sitenameA.com:
+            enabled: True
+            Directory:
+              default: {AllowOverride: All, Options: All, Require: all granted}
+            DocumentRoot: /var/html/sitenameA.com
+            Formula_Append: |
+              <IfModule mod_fastcgi.c>
+                Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+                FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -appConnTimeout 10 -idle-timeout 310 -flush -pass-header Authorization
+              </IfModule>
+            ServerName: sitenameA.com
+          sitenameB.com:
+            enabled: True
+            Directory:
+              default: {AllowOverride: All, Options: All, Require: all granted}
+            DocumentRoot: /var/html/sitenameB.com
+            Formula_Append: |
+              <IfModule mod_fastcgi.c>
+                Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+                FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -appConnTimeout 10 -idle-timeout 310 -flush -pass-header Authorization
+              </IfModule>
+            ServerName: sitenameB.com
+    php.sls:
+      php:
+        ng:
+          fpm:
+            service:
+              enabled: True
+            config:
+              ini:
+                opts:
+                  recurse: True
+                settings:
+                  PHP:
+                    engine: 'Off'
+                    extension_dir: '/usr/lib/php5/20121212/'
+                    extension: [pdo, pdo_mysql.so, pdo_pgsql.so, iconv.so, openssl.so, curl.so, gd.so, geoip.so, imagick.so, json.so, ldap.so, mysqli.so, mysql.so, readline.so, recode.so]
+              conf:
+                opts:
+                  recurse: True
+                settings:
+                  global:
+                    pid: /var/run/php5-fpm.pid
+            pools:
+              'www.conf':
+                enabled: True
+                opts:
+                   replace: True
+                settings:
+                  www:
+                    user: www-data
+                    group: www-data
+                    listen: /var/run/php5-fpm.sock
+                    listen.owner: www-data
+                    listen.group: www-data
+                    listen.mode: 0660              
+                    pm: ondemand
+                    pm.max_children: 5
+                    pm.start_servers: 3
+                    pm.min_spare_servers: 2
+                    pm.max_spare_servers: 4
+                    pm.max_requests: 200
+    mysql.sls:
+      mysql:
+        server:
+          root_user: 'root'
+          root_password: 'somepass'
+          user: mysql
+          mysqld:
+            bind-address: 0.0.0.0
+            log_bin: /var/log/mysql/mysql-bin.log
+            port: 3306
+            binlog_do_db: foo
+            auto_increment_increment: 5
+        database:
+          - siteAdb
+          - siteBdb
+        user:
+          siteAdbuser:
+            password: 'siteAdbpass'
+            host: localhost
+            databases:
+              - database: siteAdb
+                grants: ['all privileges']
+          siteBdbuser:
+            password: 'siteBdbpass'
+            host: localhost
+            databases:
+              - database: siteBdb
+                grants: ['all privileges']  
     joomla.sls:
       joomla:
         sites:
@@ -80,10 +179,22 @@ suites:
       state_top:
         base:
           '*':
+            - apache
+            - apache.config
+            - apache.vhosts.standard
+            - php.ng
+            - php.ng.mysql
+            - mysql            
             - joomla.install
   - name: joomla_config
     provisioner:
       state_top:
         base:
           '*':
+            - apache
+            - apache.config
+            - apache.vhosts.standard
+            - php.ng
+            - php.ng.mysql
+            - mysql            
             - joomla.config
