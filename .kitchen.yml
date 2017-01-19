@@ -184,6 +184,7 @@ suites:
             - apache.vhosts.standard
             - php.ng
             - php.ng.mysql
+            - php.composer
             - mysql            
             - joomla.install
   - name: joomla_config
@@ -196,5 +197,6 @@ suites:
             - apache.vhosts.standard
             - php.ng
             - php.ng.mysql
+            - php.composer
             - mysql            
             - joomla.config
