@@ -167,12 +167,20 @@ suites:
       state_top:
         base:
           '*':
+            - apache
+            - apache.config
+            - apache.vhosts.standard
+            - php.ng
+            - php.ng.mysql
+            - php.ng.composer
+            - mysql
             - joomla
   - name: joomla_cli
     provisioner:
       state_top:
         base:
           '*':
+            - php.ng.composer            
             - joomla.cli            
   - name: joomla_install
     provisioner:
@@ -197,6 +205,6 @@ suites:
             - apache.vhosts.standard
             - php.ng
             - php.ng.mysql
-            - php.composer
+            - php.ng.composer
             - mysql            
             - joomla.config
