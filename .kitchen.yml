@@ -184,8 +184,8 @@ suites:
             - apache.vhosts.standard
             - php.ng
             - php.ng.mysql
-            - php.composer
-            - mysql            
+            - php.ng.composer
+            - mysql
             - joomla.install
   - name: joomla_config
     provisioner:
