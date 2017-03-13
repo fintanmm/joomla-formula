@@ -6,4 +6,5 @@
 install_joomlatools:
   cmd.run:
     - name: '/usr/local/bin/composer global require joomlatools/console'
-    - env: "COMPOSER_HOME={{ salt['pillar.get']('joomla:composer_home') }}"
+    - env: 
+      - COMPOSER_HOME: "{{ salt['pillar.get']('joomla:composer_home') }}"
