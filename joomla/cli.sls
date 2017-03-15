@@ -9,7 +9,7 @@ install_joomlatools:
     - env: 
       - COMPOSER_HOME: "{{ salt['pillar.get']('joomla:composer_home') }}"
 
-/usr/local/bin/composer/vendor/bin/joomla:
+/usr/local/bin/.composer/vendor/bin/joomla:
   file.symlink:
     - target: /usr/local/bin/joomla
     - makedirs: False
