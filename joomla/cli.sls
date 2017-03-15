@@ -8,3 +8,8 @@ install_joomlatools:
     - name: '/usr/local/bin/composer global require joomlatools/console'
     - env: 
       - COMPOSER_HOME: "{{ salt['pillar.get']('joomla:composer_home') }}"
+
+/usr/local/bin/composer/vendor/bin/joomla:
+  file.symlink:
+    - target: /usr/local/bin/joomla
+    - makedirs: False
