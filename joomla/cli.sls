@@ -10,6 +10,13 @@ install_joomlatools:
       - COMPOSER_HOME: "{{ salt['pillar.get']('joomla:composer_home') }}"
 
 /usr/local/bin/vendor/bin/joomla:
+  file.managed:
+    - user: www-data
+    - group: www-data
+    - mode: 755
+
+symlink_binary:
   file.symlink:
-    - target: /usr/local/bin/joomla
+    - name: /usr/local/bin/joomla
+    - target: /usr/local/bin/vendor/bin/joomla
     - makedirs: False
