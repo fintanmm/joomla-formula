@@ -7,7 +7,7 @@
 {% set cmd_config = " --mysql-login='" ~ site.dbuser ~ "' --mysql-host='" ~ site.dbhost ~ "' --mysql-database='" ~ site.database ~ "'" %}
 configure_{{ name }}:
  cmd.run:
-  - name: '/usr/local/bin/joomla site:configure {{cmd_config}} --overwrite {{ name }} --www={{ joomla.docroot }}/{{ name }}'
+  - name: '/usr/local/bin/joomla site:configure --www={{ joomla.docroot }}/{{ name }} {{cmd_config}} {{ name }}'
   - cwd: {{ joomla.docroot }}/{{ name }}
   - user: {{ joomla.www_user }}
 
