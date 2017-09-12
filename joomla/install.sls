@@ -7,7 +7,7 @@
 {% set cmd_install = "-L '" ~ site.dbuser ~ "' -H '" ~ site.dbhost ~ "' -db '" ~ site.database ~ "'" %}
 install_{{ name }}:
  cmd.run:
-  - name: '/usr/local/bin/joomla site:create --www={{ joomla.docroot }}/{{ name }} {{cmd_install}} {{ name }}'
+  - name: "/usr/local/bin/joomla site:create --www={{ joomla.docroot }}/{{ name }} {{cmd_install}} {{ name }}"
   - cwd: {{ joomla.docroot }}/{{ name }}
   - user: {{ joomla.www_user }}
 
