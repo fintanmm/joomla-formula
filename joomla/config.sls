@@ -8,7 +8,7 @@
 configure_{{ name }}:
  cmd.run:
   - name: '/usr/local/bin/joomla site:configure {{cmd_config}} --overwrite {{ name }}'
-  - cwd: {{ map.docroot }}/{{ name }}
-  - user: {{ map.www_user }}
+  - cwd: {{ docroot }}/{{ name }}
+  - user: {{ www_user }}
 
 {% endfor %}
