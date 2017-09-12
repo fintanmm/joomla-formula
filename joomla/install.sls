@@ -3,7 +3,12 @@
 
 {% from "joomla/map.jinja" import template with context %}
 
-{% set cmd_install = "-L {{ salt['pillar.get']('joomla:db:username') }} -H {{ salt['pillar.get']('joomla:db:host') }} -P {{ salt['pillar.get']('joomla:db:port') }} -db {{ salt['pillar.get']('joomla:db:name') }}" %}
-install_joomla:
+{% for name, site in pillar['joomla']['sites'].items() %}
+{% set cmd_install = "-L {{ site.dbuser }} -H {{ site.dbhost }} -P {{ site.dbport }} -db {{ site.database }} " %}
+install_{{ name }}:
  cmd.run:
-  - name: 'joomla site:configure {{cmd_install}} --overwrite {{ salt['pillar.get']('joomla:site') }}'
+  - name: '/usr/local/bin/joomla site:create {{cmd_install}} --overwrite {{ name }}'
+  - cwd: {{ map.docroot }}/{{ name }}
+  - user: {{ map.www_user }}
+
+{% endfor %}
